@@ -34,6 +34,12 @@ export class AppComponent implements OnInit {
 
 
     ngOnInit(): void {
+        this.getUserLocation();
+    }
+
+
+
+    getUserLocation() {
         this.location.getPosition()
             .subscribe(
                 (pos) => {
@@ -314,13 +320,16 @@ export class AppComponent implements OnInit {
     }
 
 
-
     makeWeatherCall(location: any) {
         this.http.getData(location)
             .subscribe((weather) => {
                 this.showWeather= false;
                 this.userLocation = weather;
             });
+    }
+
+    makeRefresh() {
+        this.getUserLocation();
     }
 
 }
