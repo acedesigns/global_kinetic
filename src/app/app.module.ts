@@ -10,12 +10,15 @@
 import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { HttpService } from "./services/http.service";
+import { MatCardModule } from "@angular/material/card";
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserModule } from "@angular/platform-browser";
 import { LocationService } from "./services/location.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { LoaderComponent } from "./components/loader/loader.component";
 import { HttpClientModule, HTTP_INTERCEPTORS, } from "@angular/common/http";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpRequestInterceptor } from "./interceptors/http-loading.interceptor";
 
@@ -28,9 +31,12 @@ import { HttpRequestInterceptor } from "./interceptors/http-loading.interceptor"
     ],
 
     imports: [
+        MatCardModule,
         FormsModule,
         BrowserModule,
         AppRoutingModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
         HttpClientModule,
         ReactiveFormsModule,
         BrowserAnimationsModule

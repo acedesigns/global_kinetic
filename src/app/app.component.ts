@@ -23,6 +23,10 @@ export class AppComponent implements OnInit {
 
     title = 'weather';
     map: any;
+    userLocation: any;
+    showMap: boolean = true;
+    showWeather: boolean = true;
+
 
     @ViewChild('myDiv') mapElement: ElementRef;
     constructor( private location: LocationService, public http: HttpService ) {}
@@ -32,6 +36,7 @@ export class AppComponent implements OnInit {
         this.location.getPosition()
             .subscribe(
                 (pos) => {
+                    this.showMap = false;
                     const latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
 
                     const mapOptions = {
@@ -294,8 +299,12 @@ export class AppComponent implements OnInit {
                             }
                         ]
                     };
-                    console.log(pos.coords.latitude);
-                    console.log(pos.coords.longitude);
+                    const location = {
+                        'lat'  :pos.coords.latitude,
+                        'lng' :pos.coords.longitude,
+                    };
+
+                    this.makeWeatherCall(location);
 
                     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
                     new google.maps.Marker({position: latLng, map: this.map, draggable: false});
@@ -303,10 +312,14 @@ export class AppComponent implements OnInit {
             )
     }
 
-    makeHttpCall() {
-        this.http.getData('comments')
-            .subscribe((r) => {
-                console.log(r);
+
+
+    makeWeatherCall(location: any) {
+        this.http.getData(location)
+            .subscribe((weather) => {
+                this.showWeather= false;
+                this.userLocation = weather;
+                console.log(this.userLocation);
             });
     }
 }

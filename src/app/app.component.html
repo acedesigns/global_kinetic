@@ -41,7 +41,6 @@
             <p class="lead text-muted">I create beautiful, usable, professional web based platforms and systems using best practice accessibility and the latest standards guidelines, resulting in semantic and user friendly experiences.</p>
             <p>
                 <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-                <button class="btn btn-primary my-2" (click)="makeHttpCall()">Make Http Call</button>
             </p>
         </div>
     </section>
@@ -51,12 +50,35 @@
             <div class="row">
                 <div class="col-md-6">
                     <h3 class=" my-4">Your Location:</h3>
-
+                    <h3 class="text-center my-4">{{ userLocation?.name }}</h3>
+                    <div *ngIf=" showMap ">
+                        Loading your location ...
+                        <mat-spinner></mat-spinner>
+                    </div>
                     <div class="delivery_map" #myDiv id="map_deliver"></div>
                 </div>
 
                 <div class="col-md-6">
                     <h3 class="text-right my-4">Weather Details:</h3>
+                    <div *ngIf=" showWeather ">
+                        Loading the weather ...
+                        <mat-spinner></mat-spinner>
+                    </div>
+                    <div *ngIf=" !showWeather ">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>Current Weather</mat-card-title>
+                            <mat-card-subtitle>{{ userLocation?.weather[0].description }}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>Temperature: {{ userLocation?.main?.temp }}°C </p>
+
+                            <p>Pressure: {{ userLocation?.main?.pressure }} mBar</p>
+                            <p>Humidity: {{ userLocation?.main?.humidity }} %</p>
+
+                        </mat-card-content>
+                    </mat-card>
+                    </div>
                 </div>
             </div>
         </div>
