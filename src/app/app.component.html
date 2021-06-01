@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h3 class=" my-4">Your Location:</h3>
-                    <h3 class="text-center my-4">{{ userLocation?.name }}</h3>
+                    <h3 class="text-center my-4">{{ userLocation?.name }} {{ todayDate | date:'dd/MM/yyyy' }}</h3>
                     <div *ngIf=" showMap ">
                         Loading your location ...
                         <mat-spinner></mat-spinner>
@@ -75,6 +75,7 @@
 
                             <p>Pressure: {{ userLocation?.main?.pressure }} mBar</p>
                             <p>Humidity: {{ userLocation?.main?.humidity }} %</p>
+                            <p>Sun will set : {{ userLocation?.sys?.sunset * 1000 | date:' HH:mm' }} </p>
 
                         </mat-card-content>
                     </mat-card>

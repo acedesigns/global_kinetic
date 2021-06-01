@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
     userLocation: any;
     showMap: boolean = true;
     showWeather: boolean = true;
+    todayDate = new Date();
 
 
     @ViewChild('myDiv') mapElement: ElementRef;
@@ -319,7 +320,7 @@ export class AppComponent implements OnInit {
             .subscribe((weather) => {
                 this.showWeather= false;
                 this.userLocation = weather;
-                console.log(this.userLocation);
             });
     }
+
 }
